@@ -18,7 +18,9 @@ export default function Index() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Products" />
             <div>
-              <Link href="/products/create"> <Button>Add Product</Button></Link>
+               <Link href={route('products.create')}>
+          <Button>Add Product</Button>
+        </Link>
 
             </div>
         </AppLayout>
