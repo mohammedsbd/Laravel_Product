@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 
 
 
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Products',
@@ -17,8 +18,8 @@ export default function Index() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Products" />
-            <div>
-               <Link href={route('products.create')}>
+            <div className="p-4 m-4" >
+               <Link href={'/products/create'}>
           <Button>Add Product</Button>
         </Link>
 
