@@ -7,6 +7,7 @@ import type { BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+;
 
 
 
@@ -20,28 +21,34 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Index() {
 
-    const [data,setData, post, processing, errors] = useForm({
-        name: '',
-        price: '',
-        description: '',
-    });
+  const { data, setData, post, processing, errors } = useForm({
+    name: '',
+    price: '',
+    description: '',
+});
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        post('/products/store');
+        console.log(data);
+    }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create a new product" />
             <div className="w-8/12  p-4 m-4" >
-                <form action="" className='space-y-4'>
+                <form onSubmit={handleSubmit} action="" className='space-y-4'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <Label htmlFor="product name" className="block text-sm font-medium text-gray-700">Name</Label>
-                            <Input placeholder='prodcut name'  type="text" name="name" id="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                            <Input value={data.name} onChange={e => setData('name', e.target.value)} placeholder='prodcut name'  type="text" name="name" id="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                         </div>
                         <div className="col-span-2">
                             <Label htmlFor="product price" className="block text-sm font-medium text-gray-700">Price</Label>
-                            <Input placeholder='prodcut price'  type="text" name="name" id="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                            <Input value={data.price} onChange={e => setData('price', e.target.value)} placeholder='prodcut price'  type="text" name="name" id="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                         </div>
                         <div className="col-span-2">
                             <Label htmlFor="product description" className="block text-sm font-medium text-gray-700">Description</Label>
-                           <Textarea placeholder='prodcut description' />
+                           <Textarea value={data.description} onChange={e => setData('description', e.target.value)} placeholder='prodcut description' />
                            <Button type="submit">Add Product</Button>
 
                         </div>
