@@ -1,4 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 
 import AppLayout from '@/layouts/app-layout';
 import { Textarea } from "@/components/ui/textarea"
@@ -18,6 +19,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index() {
+
+    const [data,setData, post, processing, errors] = useForm({
+        name: '',
+        price: '',
+        description: '',
+    });
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create a new product" />
