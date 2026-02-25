@@ -1,6 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { CircleAlert } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
@@ -17,15 +18,23 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    description: string;
+}
+
 interface PageProps {
     flash: {
         message?: string;
     };
+    products: Product[];
 }
 
 export default function Index() {
 
-    const { flash } = usePage().props as PageProps;
+    const { products,flash } = usePage().props as PageProps;
 
 
 
@@ -54,6 +63,33 @@ export default function Index() {
            </div>
 
             </div>
+
+        {products.length > 0 ? (
+            <div className="p-4 m-4">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Price</TableHead>
+                            <TableHead>Description</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {products.map((product) => (
+                            <TableRow key={product.id}>
+                                <TableCell>{product.name}</TableCell>
+                                <TableCell>{product.price}</TableCell>
+                                <TableCell>{product.description}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
+        ) : (
+            <div className="p-4 m-4">
+                <p>No products found</p>
+            </div>
+        )}
         
         </AppLayout>
     );
