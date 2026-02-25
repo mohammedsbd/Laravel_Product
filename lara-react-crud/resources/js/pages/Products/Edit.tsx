@@ -1,79 +1,82 @@
-import { Head, Link } from '@inertiajs/react';
-import { useForm } from '@inertiajs/react';
-import { CircleAlert } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-
-import AppLayout from '@/layouts/app-layout';
-import { Textarea } from "@/components/ui/textarea"
-import type { BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-;
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import AppLayout from '@/layouts/app-layout';
+import { type BreadcrumbItem } from '@/types';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { CircleAlert } from 'lucide-react';
+import { router } from '@inertiajs/react';
+
+interface Product{
+    id: number,
+    name: string,
+    description: string,
+    price: number,
+}
+
+interface Props {
+    product: Product
+}
+
+export default function Edit({product} : Props) {
+
+    const {data, setData, put, processing, errors } = useForm({
+        name: product.name,
+        price: product.price,
+        description: product.description
+    });
 
 
 
+const handleUpdate = (e: React.FormEvent) => {
+    e.preventDefault();
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Create a new product',
-        href: '/products/create',
-    },
-];
+    router.put(`/products/${product.id}`, {
+        name: data.name,
+        price: data.price,
+        description: data.description,
+    });
+};
 
-export default function Index() {
 
-  const { data, setData, post, processing, errors } = useForm({
-    name: '',
-    price: '',
-    description: '',
-});
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        post('/products/store');
-        console.log(data);
-    }
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Create a new product" />
-            <div className="w-8/12  p-4 m-4" >
-                <form onSubmit={handleSubmit} action="" className='space-y-4'>
-                    {/* display error */}
-                    {Object.keys(errors).map((key) => (
-                        <Alert key={key}>
-                            <CircleAlert className="h-4 w-4" />
-                            <AlertTitle>{key}</AlertTitle>
-                            <AlertDescription>
-                                            {Object.entries(errors).map(([key, value]) => (
-                                                <p key={key}>{value}</p>
-                                            ))}
-                            </AlertDescription>
-                        </Alert>
-                    ))}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="col-span-2">
-                            <Label htmlFor="product name" className="block text-sm font-medium text-gray-700">Name</Label>
-                            <Input value={data.name} onChange={e => setData('name', e.target.value)} placeholder='prodcut name'  type="text" name="name" id="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <div className="col-span-2">
-                            <Label htmlFor="product price" className="block text-sm font-medium text-gray-700">Price</Label>
-                            <Input value={data.price} onChange={e => setData('price', e.target.value)} placeholder='prodcut price'  type="text" name="name" id="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <div className="col-span-2">
-                            <Label htmlFor="product description" className="block text-sm font-medium text-gray-700">Description</Label>
-                           <Textarea value={data.description} onChange={e => setData('description', e.target.value)} placeholder='prodcut description' />
-                           <Button type="submit">Add Product</Button>
+        <AppLayout breadcrumbs={[{title: 'Edit a Product', href: `/products/${product.id}/edit`}]}>
+            <Head title="Update a Product" />
+            <div className='w-8/12 p-4'>
+                <form onSubmit={handleUpdate} className='space-y-4'>
+                    {/* Display error  */}
 
-                        </div>
+                    {Object.keys(errors).length > 0 &&(
+                        <Alert>
+                        <CircleAlert className="h-4 w-4" />
+                        <AlertTitle>Errors!</AlertTitle>
+                        <AlertDescription>
+                            <ul>
+                                {Object.entries(errors).map(([key, message]) => (
+                                    <li key={key}>{message as string}</li>
+                                ))}
+                            </ul>
+                        </AlertDescription>
+                      </Alert>
+                    )}
+
+                    <div className='gap-1.5'>
+                        <Label htmlFor="product name">Name</Label>
+                        <Input placeholder="Product Name" value={data.name} onChange={(e) => setData('name', e.target.value)}></Input>
                     </div>
+                    <div className='gap-1.5'>
+                        <Label htmlFor="product price">Price</Label>
+                        <Input placeholder="Price" value={data.price} onChange={(e) => setData('price', e.target.value)}></Input>
+                    </div>
+                    <div className='gap-1.5'>
+                        <Label htmlFor="product description">Description</Label>
+                        <Textarea placeholder="Description" value={data.description}  onChange={(e) => setData('description', e.target.value)}/>
+                    </div>
+                    <Button disabled={processing} type="submit">Update Product</Button>
                 </form>
-      
-          {/* <Button>Add Product</Button> */}
-        
-
             </div>
         </AppLayout>
     );
 }
-
