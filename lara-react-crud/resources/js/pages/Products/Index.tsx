@@ -15,12 +15,17 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index() {
+
+
+    
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Products" />
             <div className="p-4 m-4" >
                <Link href={'/products/create'}>
+
           <Button>Add Product</Button>
+
         </Link>
 
             </div>

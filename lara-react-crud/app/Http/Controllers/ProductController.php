@@ -25,6 +25,7 @@ class ProductController extends Controller
         'description' => 'nullable  |string',
      ]);
      Product::create($request->all());
-     return redirect()->route('products.index');
+  
+     return redirect()->route('products.index')->with('success', 'Product created successfully');
     }
 }
