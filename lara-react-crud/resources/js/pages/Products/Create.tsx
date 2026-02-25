@@ -22,7 +22,7 @@ export default function Index() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create a new product" />
             <div className="w-8/12  p-4 m-4" >
-                <form action="">
+                <form action="" className='space-y-4'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <Label htmlFor="product name" className="block text-sm font-medium text-gray-700">Name</Label>
@@ -35,6 +35,8 @@ export default function Index() {
                         <div className="col-span-2">
                             <Label htmlFor="product description" className="block text-sm font-medium text-gray-700">Description</Label>
                            <Textarea placeholder='prodcut description' />
+                           <Button type="submit">Add Product</Button>
+
                         </div>
                     </div>
                 </form>
