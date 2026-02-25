@@ -36,4 +36,8 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
+    public function edit(Product $product)
+    {
+        return Inertia::render('Products/Edit',compact('product'));
+    }
 }
