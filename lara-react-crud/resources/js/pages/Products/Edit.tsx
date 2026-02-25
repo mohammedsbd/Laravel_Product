@@ -32,12 +32,8 @@ export default function Edit({product} : Props) {
 
 const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-
-    router.put(`/products/${product.id}`, {
-        name: data.name,
-        price: data.price,
-        description: data.description,
-    });
+  put(`/products/${product.id}`);
+    
 };
 
 
