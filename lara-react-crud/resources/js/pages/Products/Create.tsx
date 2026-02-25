@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
+import { CircleAlert } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 import AppLayout from '@/layouts/app-layout';
 import { Textarea } from "@/components/ui/textarea"
@@ -37,6 +39,18 @@ export default function Index() {
             <Head title="Create a new product" />
             <div className="w-8/12  p-4 m-4" >
                 <form onSubmit={handleSubmit} action="" className='space-y-4'>
+                    {/* display error */}
+                    {Object.keys(errors).map((key) => (
+                        <Alert key={key}>
+                            <CircleAlert className="h-4 w-4" />
+                            <AlertTitle>{key}</AlertTitle>
+                            <AlertDescription>
+                                            {Object.entries(errors).map(([key, value]) => (
+                                                <p key={key}>{value}</p>
+                                            ))}
+                            </AlertDescription>
+                        </Alert>
+                    ))}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <Label htmlFor="product name" className="block text-sm font-medium text-gray-700">Name</Label>

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Product;
 use Inertia\Inertia;
 
 use Illuminate\Http\Request;
@@ -17,6 +19,12 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-      dd($request->all());
+     $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'description' => 'nullable  |string',
+     ]);
+     Product::create($request->all());
+     return redirect()->route('products.index');
     }
 }
