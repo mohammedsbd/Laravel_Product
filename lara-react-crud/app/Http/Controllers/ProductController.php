@@ -15,4 +15,16 @@ class ProductController extends Controller
     {
         return Inertia::render('Products/Create',[]);
     }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ]);
+
+        Product::create($request->all());
+
+        return redirect()->route('products.index');
+    }
 }
