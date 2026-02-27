@@ -104,69 +104,6 @@ export default function Index() {
                                         >
                                             Delete
                                         </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
-                                        <Button
-                                            onClick={() =>
-                                                handleDelete(product.id, product.name)
-                                            }
-                                            disabled={processing}
-                                            className="bg-red-500 hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </Button>
 
                                     </TableCell>
                                 </TableRow>
